@@ -11,6 +11,7 @@ import net.minecraftforge.network.NetworkHooks;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -39,6 +40,7 @@ import net.minecraft.client.animation.AnimationDefinition;
 
 import net.mcreator.larnachianpantheon.procedures.LarnachsOnEntityTickUpdateProcedure;
 import net.mcreator.larnachianpantheon.init.LarnachianPantheonModEntities;
+import net.mcreator.larnachianpantheon.configuration.LarnachsModConfigurationConfiguration;
 import net.mcreator.larnachianpantheon.client.model.animations.LarnachsAnimation;
 import net.mcreator.larnachianpantheon.*;
 
@@ -129,7 +131,10 @@ public class LarnachsEntity extends Monster implements IActionStateMob, IStackab
 		this.targetSelector.addGoal(5, new HurtByTargetGoal(this));
 		this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
 		this.goalSelector.addGoal(6, new FloatGoal(this));
-		targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, LivingEntity.class, false));
+		if (LarnachsModConfigurationConfiguration.RAMPAGEMODE.get())
+			targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, LivingEntity.class, false));
+		else
+			targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Player.class, false));
 	}
 
 	public void setShakePosition(double x, double y, double z) {
@@ -376,6 +381,13 @@ public class LarnachsEntity extends Monster implements IActionStateMob, IStackab
 				}
 			}
 		}
+	}
+
+	@Override
+	public void die(DamageSource source) {
+		super.die(source);
+		if (!level().isClientSide())
+			setActionState(100);
 	}
 
 	protected float getDamageAfterArmorAbsorb(DamageSource source, float amount) {

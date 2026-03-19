@@ -203,6 +203,18 @@
         ]
       },
       "path": "~/goals"
+    },
+    {
+      "name": "LarnachsModConfiguration",
+      "type": "config",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "larnachs_mod_configuration",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/larnachianpantheon/configuration/LarnachsModConfigurationConfiguration.java"
+        ]
+      }
     }
   ],
   "variable_elements": [],
@@ -217,6 +229,7 @@
   },
   "metadata": {
     "files": [
+      "src/main/java/net/mcreator/larnachianpantheon/init/LarnachianPantheonModConfigs.java",
       "src/main/java/net/mcreator/larnachianpantheon/init/LarnachianPantheonModItems.java",
       "src/main/java/net/mcreator/larnachianpantheon/init/LarnachianPantheonModEntities.java",
       "src/main/java/net/mcreator/larnachianpantheon/init/LarnachianPantheonModEntityRenderers.java",
@@ -255,8 +268,8 @@
   "workspaceSettings": {
     "modid": "larnachian_pantheon",
     "modName": "Larnachian Pantheon",
-    "version": "1.0.0",
-    "author": "MCreator",
+    "version": "0.0.0",
+    "author": "CrimsonSteve",
     "websiteURL": "https://mcreator.net",
     "license": "Not specified",
     "serverSideOnly": false,

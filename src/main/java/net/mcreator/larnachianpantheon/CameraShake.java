@@ -21,6 +21,8 @@ import net.minecraftforge.api.distmarker.Dist;
 
 import net.minecraft.world.phys.Vec3;
 
+import net.mcreator.larnachianpantheon.configuration.LarnachsModConfigurationConfiguration;
+
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.List;
 
@@ -29,12 +31,13 @@ public class CameraShake {
 	private static final List<CameraShakeSegment> SHAKES = new CopyOnWriteArrayList<>();
 
 	public static void addShake(CameraShakeSegment segment) {
-		SHAKES.add(segment);
+		if (LarnachsModConfigurationConfiguration.CAMERASHAKE.get())
+			SHAKES.add(segment);
 	}
 
 	@SubscribeEvent
 	public static void onCameraSetup(ViewportEvent.ComputeCameraAngles event) {
-		if (SHAKES.isEmpty())
+		if (!LarnachsModConfigurationConfiguration.CAMERASHAKE.get() || SHAKES.isEmpty())
 			return;
 		Vec3 cameraPos = event.getCamera().getPosition();
 		float totalPitch = 0f;
