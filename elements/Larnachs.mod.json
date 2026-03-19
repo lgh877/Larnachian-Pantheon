@@ -1,0 +1,215 @@
+{
+  "_fv": 79,
+  "_type": "livingentity",
+  "definition": {
+    "mobName": "Larnachs",
+    "mobLabel": "",
+    "mobModelName": "ModelLarnachs",
+    "mobModelTexture": "larnachs_no_layer.png",
+    "transparentModelCondition": {
+      "fixedValue": false
+    },
+    "isShakingCondition": {
+      "fixedValue": false
+    },
+    "solidBoundingBox": {
+      "fixedValue": false
+    },
+    "visualScale": {
+      "fixedValue": 1.0
+    },
+    "boundingBoxScale": {
+      "fixedValue": 1.0
+    },
+    "modelLayers": [
+      {
+        "model": "Default",
+        "texture": "larnachs_layer1.png",
+        "disableHurtOverlay": true,
+        "glow": true
+      }
+    ],
+    "animations": [
+      {
+        "animation": {
+          "value": "CUSTOM:LarnachsAnimation.idle"
+        },
+        "speed": 1.0,
+        "walking": false,
+        "amplitude": 1.0
+      }
+    ],
+    "modelWidth": 2.0,
+    "modelHeight": 5.7,
+    "modelShadowSize": 1.5,
+    "mountedYOffset": 0.0,
+    "hasSpawnEgg": true,
+    "spawnEggBaseColor": {
+      "value": -1,
+      "falpha": 0.0
+    },
+    "spawnEggDotColor": {
+      "value": -1,
+      "falpha": 0.0
+    },
+    "spawnEggTexture": "larnachs_spawn_egg",
+    "creativeTabs": [
+      {
+        "value": "MISC"
+      }
+    ],
+    "isBoss": false,
+    "bossBarColor": "PINK",
+    "bossBarType": "PROGRESS",
+    "equipmentMainHand": {
+      "value": ""
+    },
+    "equipmentOffHand": {
+      "value": ""
+    },
+    "equipmentHelmet": {
+      "value": ""
+    },
+    "equipmentBody": {
+      "value": ""
+    },
+    "equipmentLeggings": {
+      "value": ""
+    },
+    "equipmentBoots": {
+      "value": ""
+    },
+    "mobBehaviourType": "Mob",
+    "mobCreatureType": "UNDEFINED",
+    "attackStrength": 10,
+    "attackKnockback": 2.0,
+    "knockbackResistance": 0.9,
+    "movementSpeed": 0.4,
+    "stepHeight": 2.1,
+    "armorBaseValue": 15.0,
+    "trackingRange": 64,
+    "followRange": 64,
+    "health": 500,
+    "xpAmount": 700,
+    "waterMob": false,
+    "breatheUnderwater": {
+      "fixedValue": false
+    },
+    "pushedByFluids": {
+      "fixedValue": true
+    },
+    "flyingMob": false,
+    "inventorySize": 9,
+    "inventoryStackSize": 99,
+    "disableCollisions": false,
+    "ridable": false,
+    "canControlForward": false,
+    "canControlStrafe": false,
+    "immuneToFire": false,
+    "immuneToArrows": false,
+    "immuneToFallDamage": false,
+    "immuneToCactus": false,
+    "immuneToDrowning": false,
+    "immuneToLightning": false,
+    "immuneToPotions": false,
+    "immuneToPlayer": false,
+    "immuneToExplosion": false,
+    "immuneToTrident": false,
+    "immuneToAnvil": false,
+    "immuneToWither": false,
+    "immuneToDragonBreath": false,
+    "mobDrop": {
+      "value": ""
+    },
+    "livingSound": {
+      "value": ""
+    },
+    "hurtSound": {
+      "value": "item.axe.scrape"
+    },
+    "deathSound": {
+      "value": "item.axe.scrape"
+    },
+    "stepSound": {
+      "value": ""
+    },
+    "raidCelebrationSound": {
+      "value": ""
+    },
+    "entityDataEntries": [
+      {
+        "min": -2147483648,
+        "max": 2147483647,
+        "name": "actionState",
+        "type": "integer",
+        "value": 0
+      },
+      {
+        "min": -2147483648,
+        "max": 2147483647,
+        "name": "walkState",
+        "type": "integer",
+        "value": 0
+      },
+      {
+        "min": -2147483648,
+        "max": 2147483647,
+        "name": "bodyRotationState",
+        "type": "integer",
+        "value": 0
+      },
+      {
+        "min": -2147483648,
+        "max": 2147483647,
+        "name": "bodyXRotation",
+        "type": "integer",
+        "value": 0
+      },
+      {
+        "min": -2147483648,
+        "max": 2147483647,
+        "name": "forcedRotation",
+        "type": "integer",
+        "value": 0
+      }
+    ],
+    "onMobTickUpdate": {
+      "name": "LarnachsOnEntityTickUpdate"
+    },
+    "hasAI": true,
+    "aiBase": "(none)",
+    "aixml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"aitasks_container\" deletable=\"false\" x=\"40\" y=\"40\"><next><block type=\"java_code\"><field name=\"CODE\">\t\tgoalSelector.addGoal(0, new DoNothingGoal(this));&amp;#10;moveControl = new LarnachsMoveControl(this);</field><next><block type=\"attack_with_range\"><field name=\"range\">0</field><field name=\"speed\">1</field><field name=\"longmemory\">FALSE</field><field name=\"condition\">null,null</field><next><block type=\"wander\"><field name=\"speed\">1</field><field name=\"condition\">null,null</field><next><block type=\"attack_action\"><field name=\"callhelp\">FALSE</field><field name=\"condition\">null,null</field><next><block type=\"look_around\"><field name=\"condition\">null,null</field><next><block type=\"swim_in_water\"><field name=\"condition\">null,null</field><next><block type=\"java_code\"><field name=\"CODE\">}</field><next><block type=\"java_code\"><field name=\"CODE\">\tpublic float walkAmplitude, walkAmplitudeO, forcedRotation;&amp;#10;\tpublic int bodyXRot, bodyXRotO, prevBodyXRot, bodyXRotSpeed, actionTicks;&amp;#10;\tpublic CopyOnWriteArrayList&lt;BaseAnimation&gt; animList = new CopyOnWriteArrayList&lt;&gt;();&amp;#10;&amp;#10;\tpublic CopyOnWriteArrayList&lt;? extends BaseAnimation&gt; getAnimList() {&amp;#10;\t\treturn animList;&amp;#10;\t}&amp;#10;&amp;#10;\tpublic int getActionState() {&amp;#10;\t\treturn entityData.get(DATA_actionState);&amp;#10;\t}&amp;#10;&amp;#10;\tpublic void setActionState(int input) {&amp;#10;\t\tentityData.set(DATA_actionState, input);&amp;#10;\t}&amp;#10;&amp;#10;\tpublic boolean isInAction() {&amp;#10;\t\treturn entityData.get(DATA_actionState) &gt; 10;&amp;#10;\t}&amp;#10;&amp;#10;\tpublic boolean isInDeathAction() {&amp;#10;\t\treturn entityData.get(DATA_actionState) == 100;&amp;#10;\t}&amp;#10;&amp;#10;\tpublic void onSyncedDataUpdated(EntityDataAccessor&lt;?&gt; p_219422_) {&amp;#10;\t\tsuper.onSyncedDataUpdated(p_219422_);&amp;#10;\t\tif (DATA_forcedRotation.equals(p_219422_)) {&amp;#10;\t\t\tforcedRotation = entityData.get(DATA_forcedRotation);&amp;#10;\t\t}&amp;#10;\t\tif (DATA_bodyXRotation.equals(p_219422_)) {&amp;#10;\t\t\tbodyXRotSpeed = Math.max(Math.abs(entityData.get(DATA_walkState) - prevBodyXRot) / 5, 1);&amp;#10;\t\t\tprevBodyXRot = entityData.get(DATA_walkState);&amp;#10;\t\t}&amp;#10;\t\tif (DATA_actionState.equals(p_219422_)) {&amp;#10;\t\t\tforcedRotation = yBodyRot;&amp;#10;\t\t\tBaseAnimation anim;&amp;#10;\t\t\tswitch (this.entityData.get(DATA_actionState)) {&amp;#10;\t\t\t\tcase 5 :&amp;#10;\t\t\t\t\tanimList.add(new ContinuousAnimation(LarnachsAnimation.SlashLR, tickCount, 1, animList, 5, () -&gt; getActionState() == 5));&amp;#10;\t\t\t\t\tbreak;&amp;#10;\t\t\t\tcase 6 :&amp;#10;\t\t\t\t\tanimList.add(new ContinuousAnimation(LarnachsAnimation.SlashRL, tickCount, 1, animList, 5, () -&gt; getActionState() == 6));&amp;#10;\t\t\t\t\tbreak;&amp;#10;\t\t\t\tcase 7 :&amp;#10;\t\t\t\t\tanimList.add(new ContinuousAnimation(LarnachsAnimation.SlashLRShort, tickCount, 1, animList, 5, () -&gt; getActionState() == 7));&amp;#10;\t\t\t\t\tbreak;&amp;#10;\t\t\t\tcase 8 :&amp;#10;\t\t\t\t\tanimList.add(new ContinuousAnimation(LarnachsAnimation.SlashRLShort, tickCount, 1, animList, 5, () -&gt; getActionState() == 8));&amp;#10;\t\t\t\t\tbreak;&amp;#10;\t\t\t\tcase 11 :&amp;#10;\t\t\t\t\tanimList.add(new ContinuousAnimation(LarnachsAnimation.Chop2, tickCount, 1, animList, 5, () -&gt; getActionState() == 11));&amp;#10;\t\t\t\t\tbreak;&amp;#10;\t\t\t}&amp;#10;\t\t}&amp;#10;\t\tif (DATA_walkState.equals(p_219422_)) {&amp;#10;\t\t\tswitch (this.entityData.get(DATA_walkState)) {&amp;#10;\t\t\t\tcase 1 :&amp;#10;\t\t\t\t\tanimList.add(new UsualAnimation(LarnachsAnimation.walkForwardRight, tickCount, 1, animList, 5, 15));&amp;#10;\t\t\t\t\tbreak;&amp;#10;\t\t\t\tcase 2 :&amp;#10;\t\t\t\t\tanimList.add(new UsualAnimation(LarnachsAnimation.walkForwardLeft, tickCount, 1, animList, 5, 15));&amp;#10;\t\t\t\t\tbreak;&amp;#10;\t\t\t}&amp;#10;\t\t}&amp;#10;\t\tif (DATA_bodyRotationState.equals(p_219422_)) {&amp;#10;\t\t}&amp;#10;\t}&amp;#10;&amp;#10;\tpublic void lookAt(EntityAnchorArgument.Anchor p_20033_, Vec3 p_20034_) {&amp;#10;\t\tVec3 vec3 = p_20033_.apply(this);&amp;#10;\t\tdouble d0 = p_20034_.x - vec3.x;&amp;#10;\t\tdouble d1 = p_20034_.y - vec3.y;&amp;#10;\t\tdouble d2 = p_20034_.z - vec3.z;&amp;#10;\t\tdouble d3 = Math.sqrt(d0 * d0 + d2 * d2);&amp;#10;\t\tthis.setXRot(Mth.wrapDegrees((float) (-(Mth.atan2(d1, d3) * (double) (180F / (float) Math.PI)))));&amp;#10;\t\tthis.setYRot(Mth.wrapDegrees((float) (Mth.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F));&amp;#10;\t\tthis.setYHeadRot(this.getYRot());&amp;#10;\t\tthis.xRotO = this.getXRot();&amp;#10;\t\tthis.yRotO = this.getYRot();&amp;#10;\t\tthis.yHeadRotO = this.yHeadRot;&amp;#10;\t\tthis.yBodyRot = this.yHeadRot;&amp;#10;\t\tthis.yBodyRotO = this.yBodyRot;&amp;#10;\t\tentityData.set(DATA_forcedRotation, (int) this.getYRot());&amp;#10;\t}&amp;#10;&amp;#10;\tpublic PathNavigation createNavigation(Level p21480) {&amp;#10;\t\treturn new LarnachsPathNavigation(this, p21480);&amp;#10;\t}&amp;#10;&amp;#10;\tpublic float getSupposedRotation() {&amp;#10;\t\treturn forcedRotation;&amp;#10;\t}&amp;#10;&amp;#10;\tprotected BodyRotationControl createBodyControl() {&amp;#10;\t\treturn new ActionBodyRotationControl(this);&amp;#10;\t}</field><next><block type=\"java_code\" collapsed=\"true\"><field name=\"CODE\">/*&amp;#10;&amp;#10;implements IActionState, IStackableAnimationMob, IForceBodyRotation&amp;#10;&amp;#10;\tpublic LarnachsRenderer(EntityRendererProvider.Context context) {&amp;#10;\t\tsuper(context, new AnimatedModel(context.bakeLayer(ModelLarnachs.LAYER_LOCATION)), 1.5f);&amp;#10;\t\tthis.addLayer(new RenderLayer&lt;LarnachsEntity, ModelLarnachs&lt;LarnachsEntity&gt;&gt;(this) {&amp;#10;\t\t\tstatic final ResourceLocation LAYER_TEXTURE[] = new ResourceLocation[]{//&amp;#10;\t\t\t\t\tnew ResourceLocation(\"larnachian_pantheon:textures/entities/larnachs_layer1.png\")//&amp;#10;\t\t\t\t\t, new ResourceLocation(\"larnachian_pantheon:textures/entities/larnachs_layer2.png\")//&amp;#10;\t\t\t\t\t, new ResourceLocation(\"larnachian_pantheon:textures/entities/larnachs_layer3.png\")//&amp;#10;\t\t\t};&amp;#10;&amp;#10;\t\t\t@Override&amp;#10;\t\t\tpublic void render(PoseStack poseStack, MultiBufferSource bufferSource, int light, LarnachsEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {&amp;#10;\t\t\t\tVertexConsumer vertexConsumer = bufferSource.getBuffer(CustomRenderTypes.eyes(LAYER_TEXTURE[(entity.tickCount / 2) % 3]));&amp;#10;\t\t\t\tthis.getParentModel().renderToBuffer(poseStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);&amp;#10;\t\t\t}&amp;#10;\t\t});&amp;#10;\t}&amp;#10;&amp;#10;\t@Override&amp;#10;\tpublic ResourceLocation getTextureLocation(LarnachsEntity entity) {&amp;#10;\t\treturn new ResourceLocation(\"larnachian_pantheon:textures/entities/larnachs_no_layer.png\");&amp;#10;\t}&amp;#10;&amp;#10;\tprivate static final class AnimatedModel extends ModelLarnachs&lt;LarnachsEntity&gt; {&amp;#10;\t\tprivate final ModelPart root;&amp;#10;\t\tprivate float partialTicks;&amp;#10;\t\tprivate final HierarchicalModel animator = new HierarchicalModel&lt;LarnachsEntity&gt;() {&amp;#10;\t\t\t@Override&amp;#10;\t\t\tpublic ModelPart root() {&amp;#10;\t\t\t\treturn root;&amp;#10;\t\t\t}&amp;#10;&amp;#10;\t\t\t@Override&amp;#10;\t\t\tpublic void setupAnim(LarnachsEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {&amp;#10;\t\t\t\tthis.root().getAllParts().forEach(ModelPart::resetPose);&amp;#10;\t\t\t\tpartialTicks = ageInTicks - entity.tickCount;&amp;#10;\t\t\t\tfloat idleAmplitude = Mth.lerp(partialTicks, entity.walkAmplitudeO, entity.walkAmplitude) / 5f;&amp;#10;\t\t\t\tAnimUtil.animateAmplitude(this, entity.animationState0, LarnachsAnimation.idle, ageInTicks, 1f, idleAmplitude);&amp;#10;\t\t\t\tAnimUtil.animateAmplitude(this, entity.animationState0, LarnachsAnimation.basePose2, ageInTicks, 1f, 1 - idleAmplitude);&amp;#10;\t\t\t\tentity.animateMob(this, ageInTicks, partialTicks);&amp;#10;\t\t\t}&amp;#10;\t\t};&amp;#10;&amp;#10;\t\tpublic AnimatedModel(ModelPart root) {&amp;#10;\t\t\tsuper(root);&amp;#10;\t\t\tthis.root = root;&amp;#10;\t\t}&amp;#10;&amp;#10;\t\t@Override&amp;#10;\t\tpublic void setupAnim(LarnachsEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {&amp;#10;\t\t\tanimator.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);&amp;#10;\t\t\tfloat cameraYRot = Minecraft.getInstance().gameRenderer.getMainCamera().getYRot();&amp;#10;\t\t\tfloat f = Mth.rotLerp(partialTicks, entity.yBodyRotO, entity.yBodyRot);&amp;#10;\t\t\tneck.yRot = (cameraYRot - f) * Mth.DEG_TO_RAD;&amp;#10;\t\t\tlowerBodyRot.xRot = Mth.rotLerp(partialTicks, entity.bodyXRotO, entity.bodyXRot) * Mth.DEG_TO_RAD;&amp;#10;\t\t\tsuper.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);&amp;#10;\t\t}&amp;#10;\t}&amp;#10;&amp;#10;&amp;#10;&amp;#10;*/</field><next><block type=\"java_code\"><field name=\"CODE\">{</field></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></xml>",
+    "breedable": false,
+    "tameable": false,
+    "breedTriggerItems": [],
+    "ranged": false,
+    "rangedAttackItem": {
+      "value": ""
+    },
+    "rangedItemType": "Default item",
+    "rangedAttackInterval": 20,
+    "rangedAttackRadius": 10.0,
+    "spawnThisMob": false,
+    "doesDespawnWhenIdle": false,
+    "spawningProbability": 20,
+    "mobSpawningType": "monster",
+    "minNumberOfMobsPerGroup": 4,
+    "maxNumberOfMobsPerGroup": 4,
+    "restrictionBiomes": [],
+    "spawnInDungeons": false,
+    "raidSpawnsCount": [
+      4,
+      3,
+      3,
+      4,
+      4,
+      4,
+      2
+    ],
+    "sensitiveToVibration": false,
+    "vibrationalEvents": [],
+    "vibrationSensitivityRadius": {
+      "fixedValue": 7.0
+    }
+  }
+}

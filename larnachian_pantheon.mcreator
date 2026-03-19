@@ -1,0 +1,276 @@
+{
+  "mod_elements": [
+    {
+      "name": "Larnachs",
+      "type": "livingentity",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "larnachs",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/larnachianpantheon/entity/LarnachsEntity.java",
+          "src/main/resources/assets/larnachian_pantheon/models/item/larnachs_spawn_egg.json",
+          "src/main/java/net/mcreator/larnachianpantheon/client/renderer/LarnachsRenderer.java"
+        ]
+      },
+      "path": "~/larnachs"
+    },
+    {
+      "name": "LarnachsMoveControl",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "larnachs_move_control",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/larnachianpantheon/LarnachsMoveControl.java"
+        ]
+      },
+      "path": "~/mobControls"
+    },
+    {
+      "name": "IForceBodyRotation",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "i_force_body_rotation",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/larnachianpantheon/IForceBodyRotation.java"
+        ]
+      },
+      "path": "~/mobControls"
+    },
+    {
+      "name": "ActionBodyRotationControl",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "action_body_rotation_control",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/larnachianpantheon/ActionBodyRotationControl.java"
+        ]
+      },
+      "path": "~/mobControls"
+    },
+    {
+      "name": "LarnachsOnEntityTickUpdate",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "larnachs_on_entity_tick_update",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/larnachianpantheon/procedures/LarnachsOnEntityTickUpdateProcedure.java"
+        ]
+      },
+      "path": "~/larnachs"
+    },
+    {
+      "name": "LarnachsPathNavigation",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "larnachs_path_navigation",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/larnachianpantheon/LarnachsPathNavigation.java"
+        ]
+      },
+      "path": "~/mobControls"
+    },
+    {
+      "name": "DoNothingGoal",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "do_nothing_goal",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/larnachianpantheon/DoNothingGoal.java"
+        ]
+      },
+      "path": "~/goals"
+    },
+    {
+      "name": "FasterFlyingMoveControl",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "faster_flying_move_control",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/larnachianpantheon/FasterFlyingMoveControl.java"
+        ]
+      }
+    },
+    {
+      "name": "CameraShakeSegment",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "camera_shake_segment",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/larnachianpantheon/CameraShakeSegment.java"
+        ]
+      },
+      "path": "~/cameraShake"
+    },
+    {
+      "name": "CameraShake",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "camera_shake",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/larnachianpantheon/CameraShake.java"
+        ]
+      },
+      "path": "~/cameraShake"
+    },
+    {
+      "name": "AvoidTargetGoal",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "avoid_target_goal",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/larnachianpantheon/AvoidTargetGoal.java"
+        ]
+      },
+      "path": "~/goals"
+    },
+    {
+      "name": "LarnachsBodyRotationControl",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "larnachs_body_rotation_control",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/larnachianpantheon/LarnachsBodyRotationControl.java"
+        ]
+      },
+      "path": "~/mobControls"
+    },
+    {
+      "name": "CustomDefaultRandomPos",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "custom_default_random_pos",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/larnachianpantheon/CustomDefaultRandomPos.java"
+        ]
+      }
+    },
+    {
+      "name": "StrafingTargetGoal",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "strafing_target_goal",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/larnachianpantheon/StrafingTargetGoal.java"
+        ]
+      },
+      "path": "~/goals"
+    }
+  ],
+  "variable_elements": [],
+  "sound_elements": [],
+  "tag_elements": {},
+  "tab_element_order": {},
+  "language_map": {
+    "en_us": {
+      "item.larnachian_pantheon.larnachs_spawn_egg": "Larnachs Spawn Egg",
+      "entity.larnachian_pantheon.larnachs": "Larnachs"
+    }
+  },
+  "metadata": {
+    "files": [
+      "src/main/java/net/mcreator/larnachianpantheon/init/LarnachianPantheonModItems.java",
+      "src/main/java/net/mcreator/larnachianpantheon/init/LarnachianPantheonModEntities.java",
+      "src/main/java/net/mcreator/larnachianpantheon/init/LarnachianPantheonModEntityRenderers.java",
+      "src/main/java/net/mcreator/larnachianpantheon/LarnachianPantheonMod.java",
+      "src/main/resources/pack.mcmeta",
+      "src/main/resources/META-INF/mods.toml",
+      "src/main/java/net/mcreator/larnachianpantheon/init/LarnachianPantheonModTabs.java",
+      "src/main/java/net/mcreator/larnachianpantheon/init/LarnachianPantheonModModels.java"
+    ]
+  },
+  "foldersRoot": {
+    "name": "~",
+    "children": [
+      {
+        "name": "larnachs",
+        "children": []
+      },
+      {
+        "name": "trail",
+        "children": []
+      },
+      {
+        "name": "cameraShake",
+        "children": []
+      },
+      {
+        "name": "mobControls",
+        "children": []
+      },
+      {
+        "name": "goals",
+        "children": []
+      }
+    ]
+  },
+  "workspaceSettings": {
+    "modid": "larnachian_pantheon",
+    "modName": "Larnachian Pantheon",
+    "version": "1.0.0",
+    "author": "MCreator",
+    "websiteURL": "https://mcreator.net",
+    "license": "Not specified",
+    "serverSideOnly": false,
+    "requiredMods": [
+      "crimsonsteveapi"
+    ],
+    "dependencies": [],
+    "dependants": [],
+    "mcreatorDependencies": [
+      "nexus_compiler"
+    ],
+    "currentGenerator": "forge-1.20.1",
+    "credits": "Created using mod maker MCreator - https://mcreator.net/about",
+    "modElementsPackage": "net.mcreator.larnachianpantheon"
+  },
+  "mcreatorVersion": 202500345720
+}
