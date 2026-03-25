@@ -20,6 +20,8 @@ import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.mcreator.larnachianpantheon.entity.LarnachsEntity;
 import net.mcreator.larnachianpantheon.client.model.animations.LarnachsAnimation;
 import net.mcreator.larnachianpantheon.LarnachsMoveControl;
+import net.mcreator.larnachianpantheon.CameraShakeSegment;
+import net.mcreator.larnachianpantheon.CameraShake;
 
 import java.util.Comparator;
 
@@ -49,6 +51,7 @@ public class LarnachsOnEntityTickUpdateProcedure {
 			}
 			if (shouldPlayLandingAnim) {
 				float amplitudeLand = (float) Math.min(-mob.prevYDeltaMovement * 1.3, 1);
+				CameraShake.addShake(new CameraShakeSegment(mob.position(), (int) (1000 * amplitudeLand), 5 * amplitudeLand, mob.getBbWidth() * 15 * amplitudeLand));
 				mob.animList.add(new CustomFadeInOutAnimation(LarnachsAnimation.landing, mob.tickCount, amplitudeLand, mob.animList, 15, 16) {
 					{
 						isInstant = true;
