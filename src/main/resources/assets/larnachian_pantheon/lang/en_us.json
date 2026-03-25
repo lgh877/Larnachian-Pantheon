@@ -1,0 +1,7 @@
+{
+  "item.larnachian_pantheon.larnachs_spawn_egg": "Larnachs Spawn Egg",
+  "entity.larnachian_pantheon.larnachs": "Larnachs",
+  "larnachian_pantheon.configuration.should_play_cinematic_camera_change": "ShouldPlayCinematicCameraChange",
+  "larnachian_pantheon.configuration.should_enable_camera_shake": "ShouldEnableCameraShake",
+  "larnachian_pantheon.configuration.rampage_mode": "RampageMode"
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "larnachian_pantheon:item/larnachs_spawn_egg"
+  }
+}
