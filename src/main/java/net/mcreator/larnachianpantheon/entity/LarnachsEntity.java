@@ -192,7 +192,6 @@ public class LarnachsEntity extends Monster implements IActionStateMob, IStackab
 		UsualAnimation anim = new UsualAnimation(animationType, this.tickCount, amplitude, this.animList, 10, 15) {
 			{
 				this.remainingFadeTicks = 5;
-				//this.fullyActive = true;
 			}
 
 			@Override
@@ -342,6 +341,8 @@ public class LarnachsEntity extends Monster implements IActionStateMob, IStackab
 								fullyActive = true;
 							}
 						});
+						break;
+					case 100 :
 						break;
 				}
 				forcedRotation = yBodyRot;

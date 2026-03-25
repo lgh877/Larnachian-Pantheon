@@ -23,12 +23,12 @@ import net.minecraft.world.phys.Vec3;
 
 import net.mcreator.larnachianpantheon.configuration.LarnachsModConfigurationConfiguration;
 
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class CameraShake {
-	private static final List<CameraShakeSegment> SHAKES = new CopyOnWriteArrayList<>();
+	private static final List<CameraShakeSegment> SHAKES = new ArrayList<>();
 
 	public static void addShake(CameraShakeSegment segment) {
 		if (LarnachsModConfigurationConfiguration.CAMERASHAKE.get())
@@ -45,7 +45,8 @@ public class CameraShake {
 		float totalRoll = 0f;
 		boolean needsCleanup = false;
 		boolean canShake = false;
-		for (CameraShakeSegment shake : SHAKES) {
+		for (int i = 0; i < SHAKES.size(); i++) {
+			CameraShakeSegment shake = SHAKES.get(i);
 			if (shake.isExpired()) {
 				needsCleanup = true;
 				continue;

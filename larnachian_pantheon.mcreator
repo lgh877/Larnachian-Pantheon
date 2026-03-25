@@ -215,6 +215,42 @@
           "src/main/java/net/mcreator/larnachianpantheon/configuration/LarnachsModConfigurationConfiguration.java"
         ]
       }
+    },
+    {
+      "name": "IsLookingAtMe",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_looking_at_me",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "entityToCheck",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/larnachianpantheon/procedures/IsLookingAtMeProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "TrailSegment",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "trail_segment",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/larnachianpantheon/TrailSegment.java"
+        ]
+      },
+      "path": "~/trail"
     }
   ],
   "variable_elements": [],
