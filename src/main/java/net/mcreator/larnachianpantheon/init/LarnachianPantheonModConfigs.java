@@ -1,20 +1,37 @@
 package net.mcreator.larnachianpantheon.init;
 
-import net.minecraftforge.fml.event.lifecycle.FMLConstructModEvent;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.neoforged.neoforge.client.gui.ConfigurationScreen;
+import net.neoforged.fml.event.lifecycle.FMLConstructModEvent;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.ModList;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.api.distmarker.Dist;
 
 import net.mcreator.larnachianpantheon.configuration.LarnachsModConfigurationConfiguration;
-import net.mcreator.larnachianpantheon.LarnachianPantheonMod;
 
-@Mod.EventBusSubscriber(modid = LarnachianPantheonMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class LarnachianPantheonModConfigs {
-	@SubscribeEvent
-	public static void register(FMLConstructModEvent event) {
-		event.enqueueWork(() -> {
-			ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, LarnachsModConfigurationConfiguration.SPEC, "LarnachianPantheonConfig.toml");
-		});
+	@EventBusSubscriber
+	public static class CommonRegistry {
+		@SubscribeEvent
+		public static void register(FMLConstructModEvent event) {
+			event.enqueueWork(() -> {
+				ModContainer container = ModList.get().getModContainerById("larnachian_pantheon").get();
+				container.registerConfig(ModConfig.Type.COMMON, LarnachsModConfigurationConfiguration.SPEC, "LarnachianPantheonConfig.toml");
+			});
+		}
+	}
+
+	@EventBusSubscriber(value = Dist.CLIENT)
+	public static class ClientRegistry {
+		@SubscribeEvent
+		public static void register(FMLConstructModEvent event) {
+			event.enqueueWork(() -> {
+				ModContainer container = ModList.get().getModContainerById("larnachian_pantheon").get();
+				container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+			});
+		}
 	}
 }

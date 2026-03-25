@@ -1,7 +1,5 @@
 package net.mcreator.larnachianpantheon.procedures;
 
-import net.minecraftforge.registries.ForgeRegistries;
-
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.level.LevelAccessor;
@@ -14,12 +12,15 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.util.Mth;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 
 import net.mcreator.larnachianpantheon.entity.LarnachsEntity;
 import net.mcreator.larnachianpantheon.client.model.animations.LarnachsAnimation;
 import net.mcreator.larnachianpantheon.LarnachsMoveControl;
+import net.mcreator.larnachianpantheon.CameraShakeSegment;
+import net.mcreator.larnachianpantheon.CameraShake;
 
 import java.util.Comparator;
 
@@ -49,6 +50,7 @@ public class LarnachsOnEntityTickUpdateProcedure {
 			}
 			if (shouldPlayLandingAnim) {
 				float amplitudeLand = (float) Math.min(-mob.prevYDeltaMovement * 1.3, 1);
+				CameraShake.addShake(new CameraShakeSegment(mob.position(), (int) (1000 * amplitudeLand), 5 * amplitudeLand, mob.getBbWidth() * 15 * amplitudeLand));
 				mob.animList.add(new CustomFadeInOutAnimation(LarnachsAnimation.landing, mob.tickCount, amplitudeLand, mob.animList, 15, 16) {
 					{
 						isInstant = true;
@@ -122,9 +124,9 @@ public class LarnachsOnEntityTickUpdateProcedure {
 						} else if (actionTicks == 12) {
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {
-									_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("item.trident.throw")), SoundSource.HOSTILE, 2, (float) 0.5);
+									_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("item.trident.throw")), SoundSource.HOSTILE, 2, (float) 0.5);
 								} else {
-									_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("item.trident.throw")), SoundSource.HOSTILE, 2, (float) 0.5, false);
+									_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("item.trident.throw")), SoundSource.HOSTILE, 2, (float) 0.5, false);
 								}
 							}
 						} else if (actionTicks == 13) {
@@ -211,9 +213,9 @@ public class LarnachsOnEntityTickUpdateProcedure {
 						} else if (actionTicks == 11) {
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {
-									_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("item.trident.throw")), SoundSource.HOSTILE, 2, (float) 0.5);
+									_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("item.trident.throw")), SoundSource.HOSTILE, 2, (float) 0.5);
 								} else {
-									_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("item.trident.throw")), SoundSource.HOSTILE, 2, (float) 0.5, false);
+									_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("item.trident.throw")), SoundSource.HOSTILE, 2, (float) 0.5, false);
 								}
 							}
 						} else if (actionTicks == 12) {
@@ -288,9 +290,9 @@ public class LarnachsOnEntityTickUpdateProcedure {
 						if (actionTicks == 0) {
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {
-									_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("item.trident.throw")), SoundSource.HOSTILE, 2, (float) 0.5);
+									_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("item.trident.throw")), SoundSource.HOSTILE, 2, (float) 0.5);
 								} else {
-									_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("item.trident.throw")), SoundSource.HOSTILE, 2, (float) 0.5, false);
+									_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("item.trident.throw")), SoundSource.HOSTILE, 2, (float) 0.5, false);
 								}
 							}
 						} else if (actionTicks == 1) {
@@ -365,9 +367,9 @@ public class LarnachsOnEntityTickUpdateProcedure {
 						if (actionTicks == 0) {
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {
-									_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("item.trident.throw")), SoundSource.HOSTILE, 2, (float) 0.5);
+									_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("item.trident.throw")), SoundSource.HOSTILE, 2, (float) 0.5);
 								} else {
-									_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("item.trident.throw")), SoundSource.HOSTILE, 2, (float) 0.5, false);
+									_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("item.trident.throw")), SoundSource.HOSTILE, 2, (float) 0.5, false);
 								}
 							}
 						} else if (actionTicks == 1) {
@@ -501,9 +503,9 @@ public class LarnachsOnEntityTickUpdateProcedure {
 						} else if (actionTicks == 12) {
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {
-									_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("item.trident.throw")), SoundSource.HOSTILE, 2, (float) 0.5);
+									_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("item.trident.throw")), SoundSource.HOSTILE, 2, (float) 0.5);
 								} else {
-									_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("item.trident.throw")), SoundSource.HOSTILE, 2, (float) 0.5, false);
+									_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("item.trident.throw")), SoundSource.HOSTILE, 2, (float) 0.5, false);
 								}
 							}
 						} else if (actionTicks == 14) {
@@ -572,9 +574,9 @@ public class LarnachsOnEntityTickUpdateProcedure {
 						} else if (actionTicks == 12) {
 							if (world instanceof Level _level) {
 								if (!_level.isClientSide()) {
-									_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("item.trident.throw")), SoundSource.HOSTILE, 2, (float) 0.5);
+									_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("item.trident.throw")), SoundSource.HOSTILE, 2, (float) 0.5);
 								} else {
-									_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("item.trident.throw")), SoundSource.HOSTILE, 2, (float) 0.5, false);
+									_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("item.trident.throw")), SoundSource.HOSTILE, 2, (float) 0.5, false);
 								}
 							}
 						} else if (actionTicks == 14) {
@@ -631,9 +633,9 @@ public class LarnachsOnEntityTickUpdateProcedure {
 							if (entity.onGround()) {
 								if (world instanceof Level _level) {
 									if (!_level.isClientSide()) {
-										_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.zombie.attack_iron_door")), SoundSource.HOSTILE, 2, (float) 0.5);
+										_level.playSound(null, BlockPos.containing(x, y, z), BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("entity.zombie.attack_iron_door")), SoundSource.HOSTILE, 2, (float) 0.5);
 									} else {
-										_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.zombie.attack_iron_door")), SoundSource.HOSTILE, 2, (float) 0.5, false);
+										_level.playLocalSound(x, y, z, BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("entity.zombie.attack_iron_door")), SoundSource.HOSTILE, 2, (float) 0.5, false);
 									}
 								}
 							} else {
@@ -643,7 +645,7 @@ public class LarnachsOnEntityTickUpdateProcedure {
 						} else if (actionTicks == 16) {
 							Vec3 lookVec = VectorHelper.calculateFlatViewVector(mob.yBodyRot);
 							mob.setDeltaMovement(lookVec.x() * mob.nextJumpDist, mob.nextJumpHeight, lookVec.z() * mob.nextJumpDist);
-						} else if (actionTicks > 16 && (entity.onGround() || entity.isInWaterOrBubble())) {
+						} else if (actionTicks > 16 && (entity.onGround() || entity.isInLiquid())) {
 							mob.actionTicks = 0;
 							mob.setActionState(0);
 						} else if (actionTicks == 40) {

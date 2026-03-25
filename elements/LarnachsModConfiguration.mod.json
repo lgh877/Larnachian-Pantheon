@@ -5,6 +5,6 @@
     "file": "LarnachianPantheonConfig",
     "configType": 0,
     "config": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"config_start\" deletable=\"false\" x=\"40\" y=\"40\"><next><block type=\"config_variable\"><field name=\"name\">camerashake</field><field name=\"comment\">Enables shake of camera in certain events.</field><value name=\"value\"><block type=\"config_logic_variable\"><field name=\"name\">ShouldEnableCameraShake</field><field name=\"value\">true</field></block></value><next><block type=\"config_variable\"><field name=\"name\">cinematiccamerachange</field><field name=\"comment\">Enables camera movement when certain scene change is required.</field><value name=\"value\"><block type=\"config_logic_variable\"><field name=\"name\">ShouldPlayCinematicCameraChange</field><field name=\"value\">true</field></block></value><next><block type=\"config_variable\"><field name=\"name\">rampagemode</field><field name=\"comment\">Makes Larnachs attack every living entity, not only player.</field><value name=\"value\"><block type=\"config_logic_variable\"><field name=\"name\">RampageMode</field><field name=\"value\">true</field></block></value></block></next></block></next></block></next></block></xml>",
-    "defining": true
+    "defining": false
   }
 }

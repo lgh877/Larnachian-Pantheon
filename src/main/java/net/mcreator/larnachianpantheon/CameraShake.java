@@ -14,21 +14,21 @@
 */
 package net.mcreator.larnachianpantheon;
 
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.client.event.ViewportEvent;
-import net.minecraftforge.api.distmarker.Dist;
+import net.neoforged.neoforge.client.event.ViewportEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.api.distmarker.Dist;
 
 import net.minecraft.world.phys.Vec3;
 
 import net.mcreator.larnachianpantheon.configuration.LarnachsModConfigurationConfiguration;
 
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
-@Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@EventBusSubscriber(value = Dist.CLIENT)
 public class CameraShake {
-	private static final List<CameraShakeSegment> SHAKES = new CopyOnWriteArrayList<>();
+	private static final List<CameraShakeSegment> SHAKES = new ArrayList<>();
 
 	public static void addShake(CameraShakeSegment segment) {
 		if (LarnachsModConfigurationConfiguration.CAMERASHAKE.get())
@@ -37,7 +37,7 @@ public class CameraShake {
 
 	@SubscribeEvent
 	public static void onCameraSetup(ViewportEvent.ComputeCameraAngles event) {
-		if (!LarnachsModConfigurationConfiguration.CAMERASHAKE.get() || SHAKES.isEmpty())
+		if (!LarnachsModConfigurationConfiguration.CAMERASHAKE.get() && SHAKES.isEmpty())
 			return;
 		Vec3 cameraPos = event.getCamera().getPosition();
 		float totalPitch = 0f;
@@ -45,7 +45,8 @@ public class CameraShake {
 		float totalRoll = 0f;
 		boolean needsCleanup = false;
 		boolean canShake = false;
-		for (CameraShakeSegment shake : SHAKES) {
+		for (int i = 0; i < SHAKES.size(); i++) {
+			CameraShakeSegment shake = SHAKES.get(i);
 			if (shake.isExpired()) {
 				needsCleanup = true;
 				continue;

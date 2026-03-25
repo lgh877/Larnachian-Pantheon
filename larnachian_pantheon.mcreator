@@ -9,6 +9,7 @@
       "metadata": {
         "files": [
           "src/main/java/net/mcreator/larnachianpantheon/entity/LarnachsEntity.java",
+          "src/main/resources/assets/larnachian_pantheon/items/larnachs_spawn_egg.json",
           "src/main/resources/assets/larnachian_pantheon/models/item/larnachs_spawn_egg.json",
           "src/main/java/net/mcreator/larnachianpantheon/client/renderer/LarnachsRenderer.java"
         ]
@@ -215,6 +216,42 @@
           "src/main/java/net/mcreator/larnachianpantheon/configuration/LarnachsModConfigurationConfiguration.java"
         ]
       }
+    },
+    {
+      "name": "IsLookingAtMe",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "is_looking_at_me",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "entityToCheck",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/larnachianpantheon/procedures/IsLookingAtMeProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "TrailSegment",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "trail_segment",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/larnachianpantheon/TrailSegment.java"
+        ]
+      },
+      "path": "~/trail"
     }
   ],
   "variable_elements": [],
@@ -224,7 +261,10 @@
   "language_map": {
     "en_us": {
       "item.larnachian_pantheon.larnachs_spawn_egg": "Larnachs Spawn Egg",
-      "entity.larnachian_pantheon.larnachs": "Larnachs"
+      "entity.larnachian_pantheon.larnachs": "Larnachs",
+      "larnachian_pantheon.configuration.should_play_cinematic_camera_change": "ShouldPlayCinematicCameraChange",
+      "larnachian_pantheon.configuration.should_enable_camera_shake": "ShouldEnableCameraShake",
+      "larnachian_pantheon.configuration.rampage_mode": "RampageMode"
     }
   },
   "metadata": {
@@ -234,9 +274,9 @@
       "src/main/java/net/mcreator/larnachianpantheon/init/LarnachianPantheonModEntities.java",
       "src/main/java/net/mcreator/larnachianpantheon/init/LarnachianPantheonModEntityRenderers.java",
       "src/main/java/net/mcreator/larnachianpantheon/LarnachianPantheonMod.java",
-      "src/main/resources/pack.mcmeta",
-      "src/main/resources/META-INF/mods.toml",
       "src/main/java/net/mcreator/larnachianpantheon/init/LarnachianPantheonModTabs.java",
+      "src/main/resources/pack.mcmeta",
+      "src/main/resources/META-INF/neoforge.mods.toml",
       "src/main/java/net/mcreator/larnachianpantheon/init/LarnachianPantheonModModels.java"
     ]
   },
@@ -281,7 +321,7 @@
     "mcreatorDependencies": [
       "nexus_compiler"
     ],
-    "currentGenerator": "forge-1.20.1",
+    "currentGenerator": "neoforge-1.21.8",
     "credits": "Created using mod maker MCreator - https://mcreator.net/about",
     "modElementsPackage": "net.mcreator.larnachianpantheon"
   },

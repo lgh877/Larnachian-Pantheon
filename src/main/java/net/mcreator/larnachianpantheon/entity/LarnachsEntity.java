@@ -4,12 +4,12 @@ import org.joml.Vector3f;
 
 import org.checkerframework.checker.units.qual.s;
 
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.network.PlayMessages;
-import net.minecraftforge.network.NetworkHooks;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.Vec2;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.monster.Monster;
@@ -23,7 +23,11 @@ import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.control.BodyRotationControl;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.util.Mth;
 import net.minecraft.sounds.SoundEvents;
@@ -32,14 +36,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.client.animation.AnimationDefinition;
 
 import net.mcreator.larnachianpantheon.procedures.LarnachsOnEntityTickUpdateProcedure;
-import net.mcreator.larnachianpantheon.init.LarnachianPantheonModEntities;
 import net.mcreator.larnachianpantheon.configuration.LarnachsModConfigurationConfiguration;
 import net.mcreator.larnachianpantheon.client.model.animations.LarnachsAnimation;
 import net.mcreator.larnachianpantheon.*;
@@ -61,40 +62,27 @@ public class LarnachsEntity extends Monster implements IActionStateMob, IStackab
 	public static final EntityDataAccessor<Integer> DATA_bodyXRotation = SynchedEntityData.defineId(LarnachsEntity.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> DATA_forcedRotation = SynchedEntityData.defineId(LarnachsEntity.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> DATA_shakeOptions = SynchedEntityData.defineId(LarnachsEntity.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Vector3f> DATA_shakePosition = SynchedEntityData.defineId(LarnachsEntity.class, EntityDataSerializers.VECTOR3);
-	public static final EntityDataAccessor<Float> DATA_movingForward = SynchedEntityData.defineId(LarnachsEntity.class, EntityDataSerializers.FLOAT);
-	public static final EntityDataAccessor<Float> DATA_movingSide = SynchedEntityData.defineId(LarnachsEntity.class, EntityDataSerializers.FLOAT);
 	public final AnimationState animationState0 = new AnimationState();
-
-	public LarnachsEntity(PlayMessages.SpawnEntity packet, Level world) {
-		this(LarnachianPantheonModEntities.LARNACHS.get(), world);
-	}
 
 	public LarnachsEntity(EntityType<LarnachsEntity> type, Level world) {
 		super(type, world);
-		setMaxUpStep(2.1f);
 		xpReward = 700;
 		setNoAi(false);
 		setPersistenceRequired();
 	}
 
 	@Override
-	public Packet<ClientGamePacketListener> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
-	}
-
-	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(DATA_actionState, 0);
-		this.entityData.define(DATA_walkState, 0);
-		this.entityData.define(DATA_bodyRotationState, 0);
-		this.entityData.define(DATA_bodyXRotation, 0);
-		this.entityData.define(DATA_forcedRotation, 0);
-		this.entityData.define(DATA_shakeOptions, 0);
-		this.entityData.define(DATA_shakePosition, new Vector3f(0, 0, 0));
-		this.entityData.define(DATA_movingForward, 0f);
-		this.entityData.define(DATA_movingSide, 0f);
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(DATA_actionState, 0);
+		builder.define(DATA_walkState, 0);
+		builder.define(DATA_bodyRotationState, 0);
+		builder.define(DATA_bodyXRotation, 0);
+		builder.define(DATA_forcedRotation, 0);
+		builder.define(DATA_shakeOptions, 0);
+		builder.define(DATA_shakePosition, new Vector3f(0, 0, 0));
+		builder.define(DATA_movingForward, 0f);
+		builder.define(DATA_movingSide, 0f);
 	}
 
 	@Override
@@ -123,19 +111,23 @@ public class LarnachsEntity extends Monster implements IActionStateMob, IStackab
 		});
 		this.goalSelector.addGoal(3, new MeleeAttackGoal(this, 1, false) {
 			@Override
-			protected double getAttackReachSqr(LivingEntity entity) {
-				return 0;
+			protected boolean canPerformAttack(LivingEntity p_301299_) {
+				return false;
 			}
 		});
 		this.goalSelector.addGoal(4, new RandomStrollGoal(this, 1));
 		this.targetSelector.addGoal(5, new HurtByTargetGoal(this));
 		this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
-		this.goalSelector.addGoal(6, new FloatGoal(this));
+		this.goalSelector.addGoal(5, new FloatGoal(this));
 		if (LarnachsModConfigurationConfiguration.RAMPAGEMODE.get())
 			targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, LivingEntity.class, false));
 		else
 			targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Player.class, false));
 	}
+
+	public static final EntityDataAccessor<Vector3f> DATA_shakePosition = SynchedEntityData.defineId(LarnachsEntity.class, EntityDataSerializers.VECTOR3);
+	public static final EntityDataAccessor<Float> DATA_movingForward = SynchedEntityData.defineId(LarnachsEntity.class, EntityDataSerializers.FLOAT);
+	public static final EntityDataAccessor<Float> DATA_movingSide = SynchedEntityData.defineId(LarnachsEntity.class, EntityDataSerializers.FLOAT);
 
 	public void setShakePosition(double x, double y, double z) {
 		entityData.set(DATA_shakePosition, new Vector3f((float) x, (float) y, (float) z));
@@ -192,7 +184,6 @@ public class LarnachsEntity extends Monster implements IActionStateMob, IStackab
 		UsualAnimation anim = new UsualAnimation(animationType, this.tickCount, amplitude, this.animList, 10, 15) {
 			{
 				this.remainingFadeTicks = 5;
-				//this.fullyActive = true;
 			}
 
 			@Override
@@ -211,10 +202,11 @@ public class LarnachsEntity extends Monster implements IActionStateMob, IStackab
 	}
 
 	private static final Predicate<Entity> IS_ON_GROUND = (p_33346_) -> {
-		return p_33346_.isAlive() && (p_33346_.onGround() || p_33346_.isInWaterOrBubble());
+		return p_33346_.isAlive() && (p_33346_.onGround() || p_33346_.isInLiquid());
 	};
 
-	protected int calculateFallDamage(float p_21237_, float p_21238_) {
+	@Override
+	protected int calculateFallDamage(double p_21237_, float p_21238_) {
 		if (!level().isClientSide()) {
 			if (p_21237_ > 3) {
 				float attackDamage = (float) getAttribute(Attributes.ATTACK_DAMAGE).getValue() * 0.5f;
@@ -342,6 +334,8 @@ public class LarnachsEntity extends Monster implements IActionStateMob, IStackab
 								fullyActive = true;
 							}
 						});
+						break;
+					case 100 :
 						break;
 				}
 				forcedRotation = yBodyRot;
@@ -495,48 +489,40 @@ public class LarnachsEntity extends Monster implements IActionStateMob, IStackab
 	}
 
 	@Override
-	public MobType getMobType() {
-		return MobType.UNDEFINED;
-	}
-
-	@Override
 	public boolean removeWhenFarAway(double distanceToClosestPlayer) {
 		return false;
 	}
 
 	@Override
 	public SoundEvent getHurtSound(DamageSource ds) {
-		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("item.axe.scrape"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("item.axe.scrape"));
 	}
 
 	@Override
 	public SoundEvent getDeathSound() {
-		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("item.axe.scrape"));
+		return BuiltInRegistries.SOUND_EVENT.getValue(ResourceLocation.parse("item.axe.scrape"));
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag compound) {
-		super.addAdditionalSaveData(compound);
-		compound.putInt("DataactionState", this.entityData.get(DATA_actionState));
-		compound.putInt("DatawalkState", this.entityData.get(DATA_walkState));
-		compound.putInt("DatabodyRotationState", this.entityData.get(DATA_bodyRotationState));
-		compound.putInt("DatabodyXRotation", this.entityData.get(DATA_bodyXRotation));
-		compound.putInt("DataforcedRotation", this.entityData.get(DATA_forcedRotation));
+	public void addAdditionalSaveData(ValueOutput valueOutput) {
+		super.addAdditionalSaveData(valueOutput);
+		valueOutput.putInt("DataactionState", this.entityData.get(DATA_actionState));
+		valueOutput.putInt("DatawalkState", this.entityData.get(DATA_walkState));
+		valueOutput.putInt("DatabodyRotationState", this.entityData.get(DATA_bodyRotationState));
+		valueOutput.putInt("DatabodyXRotation", this.entityData.get(DATA_bodyXRotation));
+		valueOutput.putInt("DataforcedRotation", this.entityData.get(DATA_forcedRotation));
+		valueOutput.putInt("DatashakeOptions", this.entityData.get(DATA_shakeOptions));
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag compound) {
-		super.readAdditionalSaveData(compound);
-		if (compound.contains("DataactionState"))
-			this.entityData.set(DATA_actionState, compound.getInt("DataactionState"));
-		if (compound.contains("DatawalkState"))
-			this.entityData.set(DATA_walkState, compound.getInt("DatawalkState"));
-		if (compound.contains("DatabodyRotationState"))
-			this.entityData.set(DATA_bodyRotationState, compound.getInt("DatabodyRotationState"));
-		if (compound.contains("DatabodyXRotation"))
-			this.entityData.set(DATA_bodyXRotation, compound.getInt("DatabodyXRotation"));
-		if (compound.contains("DataforcedRotation"))
-			this.entityData.set(DATA_forcedRotation, compound.getInt("DataforcedRotation"));
+	public void readAdditionalSaveData(ValueInput valueInput) {
+		super.readAdditionalSaveData(valueInput);
+		this.entityData.set(DATA_actionState, valueInput.getIntOr("DataactionState", 0));
+		this.entityData.set(DATA_walkState, valueInput.getIntOr("DatawalkState", 0));
+		this.entityData.set(DATA_bodyRotationState, valueInput.getIntOr("DatabodyRotationState", 0));
+		this.entityData.set(DATA_bodyXRotation, valueInput.getIntOr("DatabodyXRotation", 0));
+		this.entityData.set(DATA_forcedRotation, valueInput.getIntOr("DataforcedRotation", 0));
+		this.entityData.set(DATA_shakeOptions, valueInput.getIntOr("DatashakeOptions", 0));
 	}
 
 	@Override
@@ -553,7 +539,7 @@ public class LarnachsEntity extends Monster implements IActionStateMob, IStackab
 		LarnachsOnEntityTickUpdateProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
 	}
 
-	public static void init() {
+	public static void init(RegisterSpawnPlacementsEvent event) {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -563,6 +549,7 @@ public class LarnachsEntity extends Monster implements IActionStateMob, IStackab
 		builder = builder.add(Attributes.ARMOR, 15);
 		builder = builder.add(Attributes.ATTACK_DAMAGE, 10);
 		builder = builder.add(Attributes.FOLLOW_RANGE, 64);
+		builder = builder.add(Attributes.STEP_HEIGHT, 2.1);
 		builder = builder.add(Attributes.KNOCKBACK_RESISTANCE, 0.9);
 		builder = builder.add(Attributes.ATTACK_KNOCKBACK, 2);
 		return builder;

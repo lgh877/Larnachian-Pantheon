@@ -17,9 +17,9 @@ package net.mcreator.larnachianpantheon;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.level.pathfinder.NodeEvaluator;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.Block;
@@ -30,6 +30,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.util.Mth;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.BlockPos;
 
 import net.mcreator.larnachianpantheon.entity.LarnachsEntity;
@@ -129,7 +130,7 @@ public class LarnachsMoveControl<T extends LarnachsEntity> extends MoveControl {
 		PathNavigation pathnavigation = this.mob.getNavigation();
 		if (pathnavigation != null) {
 			NodeEvaluator nodeevaluator = pathnavigation.getNodeEvaluator();
-			if (nodeevaluator != null && nodeevaluator.getBlockPathType(this.mob.level(), Mth.floor(this.mob.getX() + (double) p_24997_), this.mob.getBlockY(), Mth.floor(this.mob.getZ() + (double) p_24998_)) != BlockPathTypes.WALKABLE) {
+			if (nodeevaluator != null && nodeevaluator.getPathType(this.mob, BlockPos.containing(this.mob.getX() + p_24997_, this.mob.getBlockY(), this.mob.getZ() + p_24998_)) != PathType.WALKABLE) {
 				return false;
 			}
 		}
@@ -144,7 +145,7 @@ public class LarnachsMoveControl<T extends LarnachsEntity> extends MoveControl {
 		this.remainingMoveTick = 16;
 		mob.playSound(SoundEvents.IRON_TRAPDOOR_OPEN, 1, 0.5f);
 		if (isCollidingObstacle//
-				&& net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(mob.level(), mob)) {
+				&& net.neoforged.neoforge.event.EventHooks.canEntityGrief((ServerLevel) mob.level(), mob)) {
 			AABB aabb = mob.getBoundingBox().inflate(0.2D);
 			for (BlockPos blockpos : BlockPos.betweenClosed(Mth.floor(aabb.minX), Mth.floor(aabb.minY), Mth.floor(aabb.minZ), Mth.floor(aabb.maxX), Mth.floor(aabb.maxY), Mth.floor(aabb.maxZ))) {
 				BlockState blockstate = mob.level().getBlockState(blockpos);

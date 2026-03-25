@@ -1,7 +1,7 @@
 package net.mcreator.larnachianpantheon.client.model;
 
-import net.minecraft.world.entity.Entity;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
@@ -12,16 +12,13 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.EntityModel;
 
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.blaze3d.vertex.PoseStack;
-
 // Made with Blockbench 5.0.7
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
-public class ModelLarnachs<T extends Entity> extends EntityModel<T> {
+public class ModelLarnachs extends EntityModel<LivingEntityRenderState> {
 	// This layer location should be baked with EntityRendererProvider.Context in
 	// the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("larnachian_pantheon", "model_larnachs"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath("larnachian_pantheon", "model_larnachs"), "main");
 	public final ModelPart whole;
 	public final ModelPart wholeCenter;
 	public final ModelPart rightThigh;
@@ -76,6 +73,7 @@ public class ModelLarnachs<T extends Entity> extends EntityModel<T> {
 	public final ModelPart bladeEnd;
 
 	public ModelLarnachs(ModelPart root) {
+		super(root);
 		this.whole = root.getChild("whole");
 		this.wholeCenter = this.whole.getChild("wholeCenter");
 		this.rightThigh = this.wholeCenter.getChild("rightThigh");
@@ -262,12 +260,13 @@ public class ModelLarnachs<T extends Entity> extends EntityModel<T> {
 		return LayerDefinition.create(meshdefinition, 256, 256);
 	}
 
-	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		whole.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-	}
+	public void setupAnim(LivingEntityRenderState state) {
+		float limbSwing = state.walkAnimationPos;
+		float limbSwingAmount = state.walkAnimationSpeed;
+		float ageInTicks = state.ageInTicks;
+		float netHeadYaw = state.yRot;
+		float headPitch = state.xRot;
 
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.trueHead.yRot = netHeadYaw / (180F / (float) Math.PI);
 		this.trueHead.xRot = headPitch / (180F / (float) Math.PI);
 	}

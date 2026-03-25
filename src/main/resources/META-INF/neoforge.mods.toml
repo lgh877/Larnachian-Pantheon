@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[47,)"
+loaderVersion="[4,)"
 license="Not specified"
 
 [[mods]]
@@ -13,23 +13,34 @@ authors="CrimsonSteve"
 # Start of user code block mod configuration
 # End of user code block mod configuration
 
+
+# Start of user code block custom mixins
+# End of user code block custom mixins
+
+[[dependencies.larnachian_pantheon]]
+    modId="neoforge"
+    type="required"
+    versionRange="[21.8.31,)"
+    ordering="AFTER"
+    side="BOTH"
+
 [[dependencies.larnachian_pantheon]]
     modId="minecraft"
-    mandatory=true
-    versionRange="[1.20.1]"
+    type="required"
+    versionRange="[1.21.8]"
     ordering="AFTER"
     side="BOTH"
 
 [[dependencies.larnachian_pantheon]]
     modId="crimsonsteveapi"
-    mandatory=true
+    type="required"
     versionRange="[0,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.larnachian_pantheon]]
     modId="nexus_compiler"
-    mandatory=false
+    type="optional"
     versionRange="[0,)"
     ordering="NONE"
     side="BOTH"
