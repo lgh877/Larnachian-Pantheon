@@ -15,23 +15,13 @@
 package net.mcreator.larnachianpantheon;
 
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
-import net.minecraft.world.level.pathfinder.PathFinder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
-import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.Mob;
 
-public class LarnachsPathNavigation extends GroundPathNavigation {
+public class LarnachsPathNavigation extends MMPathNavigateGround {
 	public LarnachsPathNavigation(Mob p_26448_, Level p_26449_) {
 		super(p_26448_, p_26449_);
-	}
-
-	protected PathFinder createPathFinder(int p_26453_) {
-		this.nodeEvaluator = new WalkNodeEvaluator();
-		this.nodeEvaluator.setCanPassDoors(true);
-		nodeEvaluator.setCanWalkOverFences(true);
-		return new PathFinder(this.nodeEvaluator, p_26453_);
 	}
 
 	public void recomputePath() {

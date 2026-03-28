@@ -251,6 +251,32 @@
         ]
       },
       "path": "~/trail"
+    },
+    {
+      "name": "MMPathFinder",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "mm_path_finder",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/larnachianpantheon/MMPathFinder.java"
+        ]
+      },
+      "path": "~/mobControls"
+    },
+    {
+      "name": "MMPathNavigateGround",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "mm_path_navigate_ground",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/larnachianpantheon/MMPathNavigateGround.java"
+        ]
+      },
+      "path": "~/mobControls"
     }
   ],
   "variable_elements": [],
@@ -304,7 +330,7 @@
   "workspaceSettings": {
     "modid": "larnachian_pantheon",
     "modName": "Larnachian Pantheon",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "author": "CrimsonSteve",
     "websiteURL": "https://mcreator.net",
     "license": "Not specified",
