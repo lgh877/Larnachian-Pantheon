@@ -10,13 +10,16 @@ import net.minecraftforge.common.ForgeSpawnEggItem;
 
 import net.minecraft.world.item.Item;
 
+import net.mcreator.larnachianpantheon.item.AsdfdsaItem;
 import net.mcreator.larnachianpantheon.LarnachianPantheonMod;
 
 public class LarnachianPantheonModItems {
 	public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, LarnachianPantheonMod.MODID);
 	public static final RegistryObject<Item> LARNACHS_SPAWN_EGG;
+	public static final RegistryObject<Item> ASDFDSA;
 	static {
 		LARNACHS_SPAWN_EGG = REGISTRY.register("larnachs_spawn_egg", () -> new ForgeSpawnEggItem(LarnachianPantheonModEntities.LARNACHS, -1, -1, new Item.Properties()));
+		ASDFDSA = REGISTRY.register("asdfdsa", AsdfdsaItem::new);
 	}
 	// Start of user code block custom items
 	// End of user code block custom items

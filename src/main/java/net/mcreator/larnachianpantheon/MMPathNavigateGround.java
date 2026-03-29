@@ -29,7 +29,7 @@ import net.minecraft.core.BlockPos;
 
 import java.util.Objects;
 
-//https://github.com/BobMowzie/MowziesMobs-Public/blob/main/src/main/java/com/bobmowzie/mowziesmobs/server/ai/MMPathNavigateGround.java
+//https://github.com/BobMowzie/MowziesMobs-Public/blob/main/src/main/java/com/bobmowzie/mowziesmobs/server/ai/MMPathFinder.java
 public class MMPathNavigateGround extends GroundPathNavigation {
 	public MMPathNavigateGround(Mob entity, Level world) {
 		super(entity, world);

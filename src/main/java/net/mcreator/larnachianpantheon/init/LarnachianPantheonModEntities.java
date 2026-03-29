@@ -15,6 +15,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Entity;
 
+import net.mcreator.larnachianpantheon.entity.TestProjectileEntity;
 import net.mcreator.larnachianpantheon.entity.LarnachsEntity;
 import net.mcreator.larnachianpantheon.LarnachianPantheonMod;
 
@@ -25,6 +26,8 @@ public class LarnachianPantheonModEntities {
 			EntityType.Builder.<LarnachsEntity>of(LarnachsEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(LarnachsEntity::new)
 
 					.sized(2f, 5.7f));
+	public static final RegistryObject<EntityType<TestProjectileEntity>> TEST_PROJECTILE = register("test_projectile",
+			EntityType.Builder.<TestProjectileEntity>of(TestProjectileEntity::new, MobCategory.MISC).setCustomClientFactory(TestProjectileEntity::new).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(0.5f, 0.5f));
 
 	// Start of user code block custom entities
 	// End of user code block custom entities

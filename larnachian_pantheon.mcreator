@@ -277,6 +277,82 @@
         ]
       },
       "path": "~/mobControls"
+    },
+    {
+      "name": "TestProjectileWhileProjectileFlyingTick",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "test_projectile_while_projectile_flying_tick",
+      "metadata": {
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "immediatesourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ],
+        "files": [
+          "src/main/java/net/mcreator/larnachianpantheon/procedures/TestProjectileWhileProjectileFlyingTickProcedure.java"
+        ]
+      }
+    },
+    {
+      "name": "TestProjectile",
+      "type": "projectile",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "test_projectile",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/larnachianpantheon/entity/TestProjectileEntity.java"
+        ]
+      }
+    },
+    {
+      "name": "ServerLevelRelatedUtils",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "server_level_related_utils",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/larnachianpantheon/ServerLevelRelatedUtils.java"
+        ]
+      },
+      "path": "~/utils"
+    },
+    {
+      "name": "Asdfdsa",
+      "type": "item",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "asdfdsa",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/larnachian_pantheon/models/item/asdfdsa.json",
+          "src/main/java/net/mcreator/larnachianpantheon/item/AsdfdsaItem.java"
+        ]
+      }
     }
   ],
   "variable_elements": [],
@@ -286,7 +362,8 @@
   "language_map": {
     "en_us": {
       "item.larnachian_pantheon.larnachs_spawn_egg": "Larnachs Spawn Egg",
-      "entity.larnachian_pantheon.larnachs": "Larnachs"
+      "entity.larnachian_pantheon.larnachs": "Larnachs",
+      "item.larnachian_pantheon.asdfdsa": "Asdfdsa"
     }
   },
   "metadata": {
@@ -324,13 +401,17 @@
       {
         "name": "goals",
         "children": []
+      },
+      {
+        "name": "utils",
+        "children": []
       }
     ]
   },
   "workspaceSettings": {
     "modid": "larnachian_pantheon",
     "modName": "Larnachian Pantheon",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "author": "CrimsonSteve",
     "websiteURL": "https://mcreator.net",
     "license": "Not specified",
