@@ -91,7 +91,7 @@ public class LarnachsEntity extends Monster implements IActionStateMob, IStackab
 		goalSelector.addGoal(0, new DoNothingGoal(this));
 		larnMoveControl = new LarnachsMoveControl(this);
 		moveControl = larnMoveControl;
-		goalSelector.addGoal(1, new StrafingTargetGoal(this, getBbWidth() * 6, getBbWidth() * 8, 0.1f, 1) {
+		goalSelector.addGoal(1, new StrafingTargetGoal(this, getBbWidth() * 6, getBbWidth() * 8, 0.6f, 1) {
 			public boolean canUse() {
 				return !LarnachsEntity.this.decidedToUseAttack && super.canUse();
 			}
@@ -338,7 +338,6 @@ public class LarnachsEntity extends Monster implements IActionStateMob, IStackab
 					case 100 :
 						break;
 				}
-				forcedRotation = yBodyRot;
 			} else if (DATA_forcedRotation.equals(p_219422_)) {
 				forcedRotationSpeed = (int) (Math.abs(Mth.wrapDegrees(forcedRotation - entityData.get(DATA_forcedRotation)) / (float) timeTookForRot)) + 1;
 				forcedRotation = entityData.get(DATA_forcedRotation);
