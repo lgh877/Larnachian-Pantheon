@@ -28,7 +28,7 @@ public class StrafingTargetGoal extends Goal {
 	protected final float maxDist, minDist, defaultStraight, defaultSide;
 	protected double stopDist;
 	private int evalChooseDirection;
-	private boolean goRight;
+	private boolean goRight, isCollided;
 
 	//protected Path path;
 	//protected final PathNavigation pathNav;
@@ -40,6 +40,7 @@ public class StrafingTargetGoal extends Goal {
 		this.defaultStraight = defaultStraight;
 		this.defaultSide = (float) Math.sqrt(1 - defaultStraight * defaultStraight);
 		goRight = mob.getRandom().nextBoolean();
+		isCollided = false;
 		//this.pathNav = mob.getNavigation();
 		this.setFlags(EnumSet.of(Goal.Flag.MOVE));
 	}
@@ -98,12 +99,19 @@ public class StrafingTargetGoal extends Goal {
 	public void tick() {
 		double distSqr = mob.distanceToSqr(toAvoid);
 		double minDistModified = minDist + (mob.getBbWidth() + toAvoid.getBbWidth()) / 2d;
-		if (distSqr < minDistModified * minDistModified) {
+		if (!isCollided) {
+			int collisionState = (mob.horizontalCollision ? 1 : 0) //
+					| (mob.verticalCollision ? 2 : 0) //
+					| (mob.verticalCollisionBelow ? 4 : 0);
+			isCollided = ((collisionState & 1) != 0) || ((collisionState & 6) == 2);
+		}
+		if (!isCollided && distSqr < minDistModified * minDistModified) {
 			mob.getMoveControl().strafe(-0.8f, goRight ? 0.6f : -0.6f);
 		} else {
 			if (++evalChooseDirection > 12) {
 				evalChooseDirection = 0;
 				goRight = mob.getRandom().nextBoolean();
+				isCollided = false;
 			}
 			mob.getMoveControl().strafe(defaultStraight, goRight ? this.defaultSide : -this.defaultSide);
 		}
