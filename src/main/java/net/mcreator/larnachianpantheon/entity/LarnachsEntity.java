@@ -329,7 +329,6 @@ public class LarnachsEntity extends Monster implements IActionStateMob, IStackab
 					case 100 :
 						break;
 				}
-				forcedRotation = yBodyRot;
 			} else if (DATA_forcedRotation.equals(p_219422_)) {
 				forcedRotationSpeed = (int) (Math.abs(Mth.wrapDegrees(forcedRotation - entityData.get(DATA_forcedRotation)) / (float) timeTookForRot)) + 1;
 				forcedRotation = entityData.get(DATA_forcedRotation);

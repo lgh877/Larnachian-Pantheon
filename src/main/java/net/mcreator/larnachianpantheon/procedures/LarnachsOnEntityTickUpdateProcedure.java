@@ -73,7 +73,7 @@ public class LarnachsOnEntityTickUpdateProcedure {
 				movecontrol.processWalk();
 			if (mob.getActionState() < 5) {
 				if ((entity.tickCount & 7) == 0) {
-					target = entity instanceof Mob _mobEnt ? (Entity) _mobEnt.getTarget() : null;
+					target = mob.getTarget();
 					if (target != null) {
 						if (!mob.decidedToUseAttack) {
 							mob.decidedToUseAttack = ++mob.attackDecisionTicks > 15;
@@ -83,7 +83,7 @@ public class LarnachsOnEntityTickUpdateProcedure {
 						double width = entity.getBbWidth();
 						int rand = Mth.nextInt(mob.getRandom(), 1, 11);
 						double yDiffAbs = Math.abs(yDiff);
-						if (mob.decidedToUseAttack && rand < (dist + yDiffAbs) / (width * 2) + 2 && mob.onGround() && (dist > width * 4 + target.getBbWidth() * 0.5 || yDiffAbs > width * 2)) {
+						if (mob.decidedToUseAttack && rand < (dist + yDiffAbs) / (width * 2) && mob.onGround() && (dist > width * 4 + target.getBbWidth() * 0.5 || yDiffAbs > width * 2)) {
 							mob.setActionState(43);
 							mob.nextJumpDist = 0.16197791 * dist;
 							mob.nextJumpHeight = Math.max(0.4, 0.06139787 * yDiff + 0.89359318);
@@ -110,14 +110,12 @@ public class LarnachsOnEntityTickUpdateProcedure {
 							if (target != null) {
 								Vec3 targetVelosity = target.getDeltaMovement();
 								Vec3 mobVelosity = mob.getDeltaMovement();
-								if (entity instanceof LarnachsEntity _datEntSetI)
-									_datEntSetI.getEntityData().set(LarnachsEntity.DATA_bodyXRotation,
+								mob.getEntityData().set(LarnachsEntity.DATA_bodyXRotation,
 											(int) Mth.clamp((int) (Math.toDegrees(Math.atan(((y + entity.getBbWidth() * 1.75 + mobVelosity.y()) - (target.getY() + target.getBbHeight() * 0.5 + -targetVelosity.y()))
 													/ Math.sqrt(Math.pow(target.getX() + targetVelosity.x() - x - mobVelosity.x(), 2) + Math.pow(target.getZ() + targetVelosity.z() - z - mobVelosity.z(), 2))))), -50, 60));
 								entity.lookAt(EntityAnchorArgument.Anchor.EYES, target.position());
 							} else {
-								if (entity instanceof LarnachsEntity _datEntSetI)
-									_datEntSetI.getEntityData().set(LarnachsEntity.DATA_bodyXRotation, 0);
+								mob.getEntityData().set(LarnachsEntity.DATA_bodyXRotation, 0);
 							}
 						} else if (actionTicks == 12) {
 							if (world instanceof Level _level) {
@@ -199,14 +197,12 @@ public class LarnachsOnEntityTickUpdateProcedure {
 							if (target != null) {
 								Vec3 targetVelosity = target.getDeltaMovement();
 								Vec3 mobVelosity = mob.getDeltaMovement();
-								if (entity instanceof LarnachsEntity _datEntSetI)
-									_datEntSetI.getEntityData().set(LarnachsEntity.DATA_bodyXRotation,
+								mob.getEntityData().set(LarnachsEntity.DATA_bodyXRotation,
 											(int) Mth.clamp((int) (Math.toDegrees(Math.atan(((y + entity.getBbWidth() * 1.75 + mobVelosity.y()) - (target.getY() + target.getBbHeight() * 0.5 + -targetVelosity.y()))
 													/ Math.sqrt(Math.pow(target.getX() + targetVelosity.x() - x - mobVelosity.x(), 2) + Math.pow(target.getZ() + targetVelosity.z() - z - mobVelosity.z(), 2))))), -50, 60));
 								entity.lookAt(EntityAnchorArgument.Anchor.EYES, target.position());
 							} else {
-								if (entity instanceof LarnachsEntity _datEntSetI)
-									_datEntSetI.getEntityData().set(LarnachsEntity.DATA_bodyXRotation, 0);
+								mob.getEntityData().set(LarnachsEntity.DATA_bodyXRotation, 0);
 							}
 						} else if (actionTicks == 11) {
 							if (world instanceof Level _level) {
@@ -274,8 +270,6 @@ public class LarnachsOnEntityTickUpdateProcedure {
 							mob.nextComboDelay = Math.abs(mob.nextComboDelay);
 							mob.canUseNextAttack = false;
 							mob.getEntityData().set(LarnachsEntity.DATA_shakeOptions, 0);
-							if (mob.getTarget() != null)
-								entity.lookAt(EntityAnchorArgument.Anchor.EYES, mob.getTarget().position());
 						} else if (actionTicks == 28) {
 							mob.actionTicks = 0;
 							mob.setActionState(0);
@@ -351,8 +345,6 @@ public class LarnachsOnEntityTickUpdateProcedure {
 							mob.nextComboDelay = Math.abs(mob.nextComboDelay);
 							mob.canUseNextAttack = false;
 							mob.getEntityData().set(LarnachsEntity.DATA_shakeOptions, 0);
-							if (mob.getTarget() != null)
-								entity.lookAt(EntityAnchorArgument.Anchor.EYES, mob.getTarget().position());
 						} else if (actionTicks == 23) {
 							mob.actionTicks = 0;
 							mob.setActionState(0);
@@ -428,8 +420,6 @@ public class LarnachsOnEntityTickUpdateProcedure {
 							mob.nextComboDelay = Math.abs(mob.nextComboDelay);
 							mob.canUseNextAttack = false;
 							mob.getEntityData().set(LarnachsEntity.DATA_shakeOptions, 0);
-							if (mob.getTarget() != null)
-								entity.lookAt(EntityAnchorArgument.Anchor.EYES, mob.getTarget().position());
 						} else if (actionTicks == 23) {
 							mob.actionTicks = 0;
 							mob.setActionState(0);
@@ -442,18 +432,16 @@ public class LarnachsOnEntityTickUpdateProcedure {
 						if (actionTicks == 0) {
 							if (mob.nextComboDelay != 0) {
 								target = mob.getTarget();
-								if (entity instanceof LarnachsEntity _datEntSetI)
-									_datEntSetI.getEntityData().set(LarnachsEntity.DATA_bodyRotationState, 0);
+								mob.getEntityData().set(LarnachsEntity.DATA_bodyRotationState, 0);
 								if (target != null) {
 									Vec3 targetVelosity = target.getDeltaMovement();
 									Vec3 mobVelosity = mob.getDeltaMovement();
-									if (entity instanceof LarnachsEntity _datEntSetI)
-										_datEntSetI.getEntityData().set(LarnachsEntity.DATA_bodyXRotation,
+									mob.getEntityData().set(LarnachsEntity.DATA_bodyXRotation,
 												(int) Mth.clamp((int) (Math.toDegrees(Math.atan(((y + entity.getBbWidth() * 1.75 + mobVelosity.y()) - (target.getY() + target.getBbHeight() * 0.5 + -targetVelosity.y()))
 														/ Math.sqrt(Math.pow(target.getX() + targetVelosity.x() - x - mobVelosity.x(), 2) + Math.pow(target.getZ() + targetVelosity.z() - z - mobVelosity.z(), 2))))), -50, 60));
-								} else {
-									if (entity instanceof LarnachsEntity _datEntSetI)
-										_datEntSetI.getEntityData().set(LarnachsEntity.DATA_bodyXRotation, 0);
+                                    entity.lookAt(EntityAnchorArgument.Anchor.EYES, target.position());
+                                } else {
+									mob.getEntityData().set(LarnachsEntity.DATA_bodyXRotation, 0);
 								}
 							} else {
 								mob.actionTicks = 0;
@@ -470,18 +458,16 @@ public class LarnachsOnEntityTickUpdateProcedure {
 						if (actionTicks == 0) {
 							if (mob.nextComboDelay != 0) {
 								target = mob.getTarget();
-								if (entity instanceof LarnachsEntity _datEntSetI)
-									_datEntSetI.getEntityData().set(LarnachsEntity.DATA_bodyRotationState, 0);
+                                mob.getEntityData().set(LarnachsEntity.DATA_bodyRotationState, 0);
 								if (target != null) {
 									Vec3 targetVelosity = target.getDeltaMovement();
 									Vec3 mobVelosity = mob.getDeltaMovement();
-									if (entity instanceof LarnachsEntity _datEntSetI)
-										_datEntSetI.getEntityData().set(LarnachsEntity.DATA_bodyXRotation,
+									mob.getEntityData().set(LarnachsEntity.DATA_bodyXRotation,
 												(int) Mth.clamp((int) (Math.toDegrees(Math.atan(((y + entity.getBbWidth() * 1.75 + mobVelosity.y()) - (target.getY() + target.getBbHeight() * 0.5 + -targetVelosity.y()))
 														/ Math.sqrt(Math.pow(target.getX() + targetVelosity.x() - x - mobVelosity.x(), 2) + Math.pow(target.getZ() + targetVelosity.z() - z - mobVelosity.z(), 2))))), -50, 60));
-								} else {
-									if (entity instanceof LarnachsEntity _datEntSetI)
-										_datEntSetI.getEntityData().set(LarnachsEntity.DATA_bodyXRotation, 0);
+                                    entity.lookAt(EntityAnchorArgument.Anchor.EYES, target.position());
+                                } else {
+									mob.getEntityData().set(LarnachsEntity.DATA_bodyXRotation, 0);
 								}
 							} else {
 								mob.actionTicks = 0;
@@ -561,13 +547,11 @@ public class LarnachsOnEntityTickUpdateProcedure {
 								entity.lookAt(EntityAnchorArgument.Anchor.EYES, target.position());
 								Vec3 targetVelosity = target.getDeltaMovement();
 								Vec3 mobVelosity = mob.getDeltaMovement();
-								if (entity instanceof LarnachsEntity _datEntSetI)
-									_datEntSetI.getEntityData().set(LarnachsEntity.DATA_bodyXRotation,
+								mob.getEntityData().set(LarnachsEntity.DATA_bodyXRotation,
 											(int) Mth.clamp((int) (Math.toDegrees(Math.atan(((y + entity.getBbWidth() * 0.95 + mobVelosity.y()) - (target.getY() + target.getBbHeight() * 0.5 + targetVelosity.y()))
 													/ Math.sqrt(Math.pow(target.getX() + targetVelosity.x() - x - mobVelosity.x(), 2) + Math.pow(target.getZ() + targetVelosity.z() - z - mobVelosity.z(), 2))))), -70, 70));
 							} else {
-								if (entity instanceof LarnachsEntity _datEntSetI)
-									_datEntSetI.getEntityData().set(LarnachsEntity.DATA_bodyXRotation, 0);
+								mob.getEntityData().set(LarnachsEntity.DATA_bodyXRotation, 0);
 							}
 						} else if (actionTicks == 12) {
 							if (world instanceof Level _level) {

@@ -22,24 +22,17 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.Mob;
 
-public class LarnachsPathNavigation extends GroundPathNavigation {
-	public LarnachsPathNavigation(Mob p_26448_, Level p_26449_) {
-		super(p_26448_, p_26449_);
-	}
+public class LarnachsPathNavigation extends MMPathNavigateGround {
+    public LarnachsPathNavigation(Mob p_26448_, Level p_26449_) {
+        super(p_26448_, p_26449_);
+    }
 
-	protected PathFinder createPathFinder(int p_26453_) {
-		this.nodeEvaluator = new WalkNodeEvaluator();
-		this.nodeEvaluator.setCanPassDoors(true);
-		nodeEvaluator.setCanWalkOverFences(true);
-		return new PathFinder(this.nodeEvaluator, p_26453_);
-	}
+    public void recomputePath() {
+        if (((LarnachsMoveControl) mob.getMoveControl()).remainingMoveTick == 0)
+            super.recomputePath();
+    }
 
-	public void recomputePath() {
-		if (((LarnachsMoveControl) mob.getMoveControl()).remainingMoveTick == 0)
-			super.recomputePath();
-	}
-
-	protected boolean canMoveDirectly(Vec3 p_186133_, Vec3 p_186134_) {
-		return PathNavigation.isClearForMovementBetween(mob, p_186133_, p_186134_, false);
-	}
+    protected boolean canMoveDirectly(Vec3 p_186133_, Vec3 p_186134_) {
+        return PathNavigation.isClearForMovementBetween(mob, p_186133_, p_186134_, false);
+    }
 }
